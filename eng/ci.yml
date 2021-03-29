@@ -50,7 +50,7 @@ stages:
           # see helix.dot.net for a list of possible queues
           # public
           - ${{ if eq(variables['System.TeamProject'], 'public') }}:
-            - _HelixTargetQueues: "Windows.10.Amd64.Client19H1.Open;Windows.10.Arm64.Open;Windows.81.Amd64.Open;Windows.7.Amd64.Open"
+            - _HelixTargetQueues: Windows.10.Amd64.Client19H1.Open;Windows.10.Arm64.Open;Windows.81.Amd64.Open;Windows.7.Amd64.Open
           # internal
           - ${{ if ne(variables['System.TeamProject'], 'public') }}:
             - _HelixTargetQueues: Windows.10.Amd64.Client19H1.Xaml
@@ -136,7 +136,7 @@ stages:
             /p:Configuration=$(_BuildConfig)
             /p:Platform=x64
             /p:HelixSource=$(_HelixSource)
-            /p:HelixTargetQueues=$(_HelixTargetQueues)
+            /p:HelixTargetQueues="$(_HelixTargetQueues)"
             /p:Creator=$(_HelixCreator)
             /p:HelixAccessToken=$(_HelixAccessToken)
             /bl:$(BUILD.SOURCESDIRECTORY)\artifacts\log\$(_BuildConfig)\SendToHelix.binlog
