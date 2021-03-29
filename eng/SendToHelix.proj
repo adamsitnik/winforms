@@ -22,7 +22,7 @@
 
     Then, to send to the public helix queue, use the following:
 
-      msbuild .\eng\SendToHelix.proj /p:Platform=x64
+      msbuild .\eng\SendToHelix.proj /p:Platform=x64 /p:HelixTargetQueues=Windows.10.Amd64.Client19H1.Open
 
     Or, to send to the internal helix queue, use the following:
 
@@ -33,7 +33,6 @@
   <PropertyGroup>
     <HelixSource>official/winforms</HelixSource> <!-- Change to pr/winforms for PR builds -->
     <HelixType>type/tests</HelixType>
-    <HelixTargetQueues>Windows.10.Amd64.Client19H1.Open;Windows.10.Arm64.Open;Windows.81.Amd64.Open;Windows.7.Amd64.Open</HelixTargetQueues> <!-- Change to 'Windows.10.Amd64.Client19H1.Xaml' for internal builds. See helix.dot.net for a list of queues -->
     <Creator>winforms</Creator> <!-- Must provide for public builds, must be empty for internal builds -->
     <HelixAccessToken></HelixAccessToken> <!-- Must provide for internal builds, must be empty for public builds -->
     <IncludeDotNetCli>true</IncludeDotNetCli>

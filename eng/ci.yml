@@ -50,7 +50,7 @@ stages:
           # see helix.dot.net for a list of possible queues
           # public
           - ${{ if eq(variables['System.TeamProject'], 'public') }}:
-            - _HelixTargetQueues: Windows.10.Amd64.Client19H1.Open
+            - _HelixTargetQueues: Windows.10.Amd64.Client19H1.Open;Windows.10.Arm64.Open;Windows.81.Amd64.Open;Windows.7.Amd64.Open
           # internal
           - ${{ if ne(variables['System.TeamProject'], 'public') }}:
             - _HelixTargetQueues: Windows.10.Amd64.Client19H1.Xaml
@@ -170,13 +170,13 @@ stages:
         #  displayName: Pack, Sign, and Publish
 
         # Upload code coverage data
-        #- script: $(Build.SourcesDirectory)/.dotnet/dotnet msbuild -restore
-        #    eng/CodeCoverage.proj
-        #    /p:Configuration=$(_BuildConfig)
-        #    $(_InternalRuntimeDownloadArgs)
-        #    /bl:$(BUILD.SOURCESDIRECTORY)\artifacts\log\$(_BuildConfig)\CodeCoverage.binlog
-        #  displayName: Upload coverage to codecov.io (Debug)
-        #  condition: and(succeeded(), eq(variables._Coverage, 'true'))
+        - script: $(Build.SourcesDirectory)/.dotnet/dotnet msbuild -restore
+            eng/CodeCoverage.proj
+            /p:Configuration=$(_BuildConfig)
+            $(_InternalRuntimeDownloadArgs)
+            /bl:$(BUILD.SOURCESDIRECTORY)\artifacts\log\$(_BuildConfig)\CodeCoverage.binlog
+          displayName: Upload coverage to codecov.io (Debug)
+          condition: and(succeeded(), eq(variables._Coverage, 'true'))
 
 # Copied from the arcade repo and modified for winforms
 - ${{ if and(ne(variables['System.TeamProject'], 'public'), notin(variables['Build.Reason'], 'PullRequest')) }}:
