@@ -85,9 +85,9 @@ jobs:
       displayName: Build
 
     # Run Interop Tests
-    - script: dotnet build
-       --nologo --no-restore
-       -configuration $(_BuildConfig)
+    - script: dotnet test
+       --nologo
+       /p:Configuration=$(_BuildConfig)
        /p:Platform=${{ parameters.targetArchitecture }}
        $(_OfficialBuildIdArgs)
        $(_InternalRuntimeDownloadArgs)
