@@ -11,7 +11,7 @@ public class ExceptionTests : SerializationTest<FormattedObjectSerializer>
     [Fact]
     public void NotSupportedException_Parse()
     {
-        System.Windows.Forms.BinaryFormat.BinaryFormattedObject format = new(Serialize(new NotSupportedException()));
+        System.Private.Windows.Core.BinaryFormat.BinaryFormattedObject format = new(Serialize(new NotSupportedException()));
         var systemClass = (ClassRecord)format.RootRecord;
         systemClass.TypeName.FullName.Should().Be(typeof(NotSupportedException).FullName);
         systemClass.MemberNames.Should().BeEquivalentTo(

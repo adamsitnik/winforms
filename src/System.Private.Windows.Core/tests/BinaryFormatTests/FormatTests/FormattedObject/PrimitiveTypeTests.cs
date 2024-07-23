@@ -3,9 +3,9 @@
 
 using System.Formats.Nrbf;
 using System.Runtime.Serialization.Formatters.Binary;
-using System.Windows.Forms.BinaryFormat;
+using System.Private.Windows.Core.BinaryFormat;
 using FormatTests.Common;
-using PrimitiveType = System.Windows.Forms.BinaryFormat.PrimitiveType;
+using PrimitiveType = System.Private.Windows.Core.BinaryFormat.PrimitiveType;
 
 namespace FormatTests.FormattedObject;
 

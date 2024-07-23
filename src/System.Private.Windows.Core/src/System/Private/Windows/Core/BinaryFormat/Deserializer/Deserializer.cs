@@ -103,7 +103,7 @@ internal sealed partial class Deserializer : IDeserializer
     /// <summary>
     ///  Deserializes the object graph for the given <paramref name="recordMap"/> and <paramref name="rootId"/>.
     /// </summary>
-    [RequiresUnreferencedCode("Calls System.Windows.Forms.BinaryFormat.Deserializer.Deserializer.Deserialize()")]
+    [RequiresUnreferencedCode("Calls System.Private.Windows.Core.BinaryFormat.Deserializer.Deserializer.Deserialize()")]
     internal static object Deserialize(
         SerializationRecordId rootId,
         IReadOnlyDictionary<SerializationRecordId, SerializationRecord> recordMap,
@@ -114,7 +114,7 @@ internal sealed partial class Deserializer : IDeserializer
         return deserializer.Deserialize();
     }
 
-    [RequiresUnreferencedCode("Calls System.Windows.Forms.BinaryFormat.Deserializer.Deserializer.DeserializeRoot(Id)")]
+    [RequiresUnreferencedCode("Calls System.Private.Windows.Core.BinaryFormat.Deserializer.Deserializer.DeserializeRoot(Id)")]
     private object Deserialize()
     {
         DeserializeRoot(_rootId);
@@ -207,7 +207,7 @@ internal sealed partial class Deserializer : IDeserializer
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        [RequiresUnreferencedCode("Calls System.Windows.Forms.BinaryFormat.Deserializer.ObjectRecordParser.Create(Id, IRecord, IDeserializer)")]
+        [RequiresUnreferencedCode("Calls System.Private.Windows.Core.BinaryFormat.Deserializer.ObjectRecordParser.Create(Id, IRecord, IDeserializer)")]
         object DeserializeNew(SerializationRecordId id)
         {
             // Strings, string arrays, and primitive arrays can be completed without creating a
@@ -223,7 +223,7 @@ internal sealed partial class Deserializer : IDeserializer
                 SerializationRecordType.MemberPrimitiveTyped => record.GetMemberPrimitiveTypedValue(),
                 SerializationRecordType.ArraySingleString => ((SZArrayRecord<string>)record).GetArray(),
                 SerializationRecordType.ArraySinglePrimitive => ArrayRecordDeserializer.GetArraySinglePrimitive(record),
-                SerializationRecordType.BinaryArray => ArrayRecordDeserializer.GetSimpleBinaryArray((ArrayRecord)record, _typeResolver),
+                SerializationRecordType.BinaryArray => ArrayRecordDeserializer.GetSimpleBinaryArray((Formats.Nrbf.ArrayRecord)record, _typeResolver),
                 _ => null
             };
 
@@ -309,7 +309,7 @@ internal sealed partial class Deserializer : IDeserializer
                 }
             }
 
-            if (_recordMap[completedId] is ClassRecord classRecord && !_pending.HasIncompleteDependencies(completedId))
+            if (_recordMap[completedId] is Formats.Nrbf.ClassRecord classRecord && !_pending.HasIncompleteDependencies(completedId))
             {
                 // There are no remaining dependencies. Get the real object if it's an IObjectReference.
                 if (_deserializedObjects[completedId] is IObjectReference objectReference)

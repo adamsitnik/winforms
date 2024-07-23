@@ -37,7 +37,7 @@ internal static class BinaryFormattedObjectExtensions
         {
             value = default;
 
-            if (format.RootRecord is not ClassRecord classInfo
+            if (format.RootRecord is not Formats.Nrbf.ClassRecord classInfo
                 || !classInfo.TypeNameMatches(typeof(PointF))
                 || !classInfo.HasMember("x")
                 || !classInfo.HasMember("y"))
@@ -62,7 +62,7 @@ internal static class BinaryFormattedObjectExtensions
         {
             value = default;
 
-            if (format.RootRecord is not ClassRecord classInfo
+            if (format.RootRecord is not Formats.Nrbf.ClassRecord classInfo
                 || !classInfo.TypeNameMatches(typeof(RectangleF))
                 || !classInfo.HasMember("x")
                 || !classInfo.HasMember("y")
@@ -126,14 +126,14 @@ internal static class BinaryFormattedObjectExtensions
         {
             list = null;
 
-            if (format.RootRecord is not ClassRecord classInfo
+            if (format.RootRecord is not Formats.Nrbf.ClassRecord classInfo
                 || !classInfo.HasMember("_items")
                 || !classInfo.HasMember("_size")
                 || classInfo.GetRawValue("_size") is not int size
                 || !classInfo.TypeName.IsConstructedGenericType
                 || classInfo.TypeName.GetGenericTypeDefinition().Name != typeof(List<>).Name
                 || classInfo.TypeName.GetGenericArguments().Length != 1
-                || classInfo.GetRawValue("_items") is not ArrayRecord arrayRecord
+                || classInfo.GetRawValue("_items") is not Formats.Nrbf.ArrayRecord arrayRecord
                 || !IsPrimitiveArrayRecord(arrayRecord))
             {
                 return false;
@@ -176,7 +176,7 @@ internal static class BinaryFormattedObjectExtensions
         {
             value = null;
 
-            if (format.RootRecord is not ClassRecord classInfo
+            if (format.RootRecord is not Formats.Nrbf.ClassRecord classInfo
                 || !classInfo.TypeNameMatches(typeof(ArrayList))
                 || !classInfo.HasMember("_items")
                 || !classInfo.HasMember("_size")
@@ -191,7 +191,7 @@ internal static class BinaryFormattedObjectExtensions
             object?[] array = arrayRecord.GetArray();
             for (int i = 0; i < size; i++)
             {
-                if (array[i] is SerializationRecord)
+                if (array[i] is Formats.Nrbf.SerializationRecord)
                 {
                     return false;
                 }
@@ -266,7 +266,7 @@ internal static class BinaryFormattedObjectExtensions
             hashtable = null;
 
             if (format.RootRecord.RecordType != SerializationRecordType.SystemClassWithMembersAndTypes
-                || format.RootRecord is not ClassRecord classInfo
+                || format.RootRecord is not Formats.Nrbf.ClassRecord classInfo
                 || !classInfo.TypeNameMatches(typeof(Hashtable))
                 || !classInfo.HasMember("Keys")
                 || !classInfo.HasMember("Values")
@@ -313,7 +313,7 @@ internal static class BinaryFormattedObjectExtensions
         {
             exception = null;
 
-            if (format.RootRecord is not ClassRecord classInfo
+            if (format.RootRecord is not Formats.Nrbf.ClassRecord classInfo
                 || classInfo.TypeNameMatches(typeof(NotSupportedException)))
             {
                 return false;

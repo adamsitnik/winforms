@@ -19,7 +19,7 @@ public class ArrayTests : Common.ArrayTests<FormattedObjectSerializer>
     [MemberData(nameof(StringArray_Parse_Data))]
     public void StringArray_Parse(string?[] strings)
     {
-        System.Windows.Forms.BinaryFormat.BinaryFormattedObject format = new(Serialize(strings));
+        System.Private.Windows.Core.BinaryFormat.BinaryFormattedObject format = new(Serialize(strings));
         var arrayRecord = (SZArrayRecord<string>)format.RootRecord;
         arrayRecord.GetArray().Should().BeEquivalentTo(strings);
     }
@@ -35,7 +35,7 @@ public class ArrayTests : Common.ArrayTests<FormattedObjectSerializer>
     [MemberData(nameof(PrimitiveArray_Parse_Data))]
     public void PrimitiveArray_Parse(Array array)
     {
-        System.Windows.Forms.BinaryFormat.BinaryFormattedObject format = new(Serialize(array));
+        System.Private.Windows.Core.BinaryFormat.BinaryFormattedObject format = new(Serialize(array));
         var arrayRecord = (ArrayRecord)format.RootRecord;
         arrayRecord.GetArray(expectedArrayType: array.GetType()).Should().BeEquivalentTo(array);
     }

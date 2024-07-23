@@ -9,6 +9,7 @@ using System.Text;
 using System.Windows.Forms.BinaryFormat;
 using Com = Windows.Win32.System.Com;
 using System.Drawing;
+using System.Private.Windows.Core.BinaryFormat;
 
 namespace System.Windows.Forms;
 

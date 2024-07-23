@@ -12,7 +12,7 @@ public class SystemDrawingTests : Common.SystemDrawingTests<FormattedObjectSeria
     public void PointF_Parse()
     {
         PointF input = new() { X = 123.5f, Y = 456.1f };
-        System.Windows.Forms.BinaryFormat.BinaryFormattedObject format = new(Serialize(input));
+        System.Private.Windows.Core.BinaryFormat.BinaryFormattedObject format = new(Serialize(input));
 
         ClassRecord classInfo = (ClassRecord)format.RootRecord;
         classInfo.RecordType.Should().Be(SerializationRecordType.ClassWithMembersAndTypes);
@@ -28,7 +28,7 @@ public class SystemDrawingTests : Common.SystemDrawingTests<FormattedObjectSeria
     public void RectangleF_Parse()
     {
         RectangleF input = new(x: 123.5f, y: 456.1f, width: 100.25f, height: 200.75f);
-        System.Windows.Forms.BinaryFormat.BinaryFormattedObject format = new(Serialize(input));
+        System.Private.Windows.Core.BinaryFormat.BinaryFormattedObject format = new(Serialize(input));
 
         ClassRecord classInfo = (ClassRecord)format.RootRecord;
         classInfo.RecordType.Should().Be(SerializationRecordType.ClassWithMembersAndTypes);

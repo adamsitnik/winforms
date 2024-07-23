@@ -6,9 +6,10 @@
 using System.ComponentModel;
 using System.Drawing;
 using System.Formats.Nrbf;
+using System.Windows.Forms.BinaryFormat;
 using System.Runtime.Serialization.Formatters.Binary;
 
-namespace System.Windows.Forms.BinaryFormat.Tests;
+namespace System.Private.Windows.Core.BinaryFormat.Tests;
 
 public class WinFormsBinaryFormattedObjectTests
 {

@@ -17,14 +17,14 @@ internal abstract partial class ObjectRecordDeserializer
     // Used to indicate that the value is missing from the deserialized objects.
     private protected static object s_missingValueSentinel = new();
 
-    internal SerializationRecord ObjectRecord { get; }
+    internal Formats.Nrbf.SerializationRecord ObjectRecord { get; }
 
     [AllowNull]
     internal object Object { get; private protected set; }
 
     private protected IDeserializer Deserializer { get; }
 
-    private protected ObjectRecordDeserializer(SerializationRecord objectRecord, IDeserializer deserializer)
+    private protected ObjectRecordDeserializer(Formats.Nrbf.SerializationRecord objectRecord, IDeserializer deserializer)
     {
         Deserializer = deserializer;
         ObjectRecord = objectRecord;
@@ -47,7 +47,7 @@ internal abstract partial class ObjectRecordDeserializer
         {
             return (null, default);
         }
-        else if (memberValue is not SerializationRecord serializationRecord) // a primitive value
+        else if (memberValue is not Formats.Nrbf.SerializationRecord serializationRecord) // a primitive value
         {
             return (memberValue, default);
         }
@@ -94,11 +94,11 @@ internal abstract partial class ObjectRecordDeserializer
                 // Value types that aren't "complete" need to be reapplied.
                 || (Deserializer.IncompleteObjects.Contains(valueRecord) && value.GetType().IsValueType));
 
-    [RequiresUnreferencedCode("Calls System.Windows.Forms.BinaryFormat.Deserializer.ClassRecordParser.Create(ClassRecord, IDeserializer)")]
-    internal static ObjectRecordDeserializer Create(SerializationRecordId id, SerializationRecord record, IDeserializer deserializer) => record switch
+    [RequiresUnreferencedCode("Calls System.Private.Windows.Core.BinaryFormat.Deserializer.ClassRecordParser.Create(ClassRecord, IDeserializer)")]
+    internal static ObjectRecordDeserializer Create(SerializationRecordId id, Formats.Nrbf.SerializationRecord record, IDeserializer deserializer) => record switch
     {
-        ClassRecord classRecord => ClassRecordDeserializer.Create(classRecord, deserializer),
-        ArrayRecord arrayRecord => new ArrayRecordDeserializer(arrayRecord, deserializer),
+        Formats.Nrbf.ClassRecord classRecord => ClassRecordDeserializer.Create(classRecord, deserializer),
+        Formats.Nrbf.ArrayRecord arrayRecord => new ArrayRecordDeserializer(arrayRecord, deserializer),
         _ => throw new SerializationException($"Unexpected record type for {id}.")
     };
 }

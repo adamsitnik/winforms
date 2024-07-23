@@ -2,8 +2,8 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Formats.Nrbf;
+using System.Private.Windows.Core.BinaryFormat;
 using System.Runtime.Serialization;
-using System.Windows.Forms.BinaryFormat;
 
 namespace FormatTests.Common;
 

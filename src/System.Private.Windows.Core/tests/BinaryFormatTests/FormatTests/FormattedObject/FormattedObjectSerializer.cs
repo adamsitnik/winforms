@@ -2,9 +2,9 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using FormatTests.Common;
+using System.Private.Windows.Core.BinaryFormat;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters;
-using System.Windows.Forms.BinaryFormat;
 
 namespace FormatTests.FormattedObject;
 
