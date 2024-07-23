@@ -112,27 +112,7 @@ internal static class BinaryFormattedObjectExtensions
     {
         Debug.Assert(record.RecordType is SerializationRecordType.MemberPrimitiveTyped);
 
-        return record switch
-        {
-            PrimitiveTypeRecord<string> primitive => primitive.Value,
-            PrimitiveTypeRecord<bool> primitive => primitive.Value,
-            PrimitiveTypeRecord<byte> primitive => primitive.Value,
-            PrimitiveTypeRecord<sbyte> primitive => primitive.Value,
-            PrimitiveTypeRecord<char> primitive => primitive.Value,
-            PrimitiveTypeRecord<short> primitive => primitive.Value,
-            PrimitiveTypeRecord<ushort> primitive => primitive.Value,
-            PrimitiveTypeRecord<int> primitive => primitive.Value,
-            PrimitiveTypeRecord<uint> primitive => primitive.Value,
-            PrimitiveTypeRecord<long> primitive => primitive.Value,
-            PrimitiveTypeRecord<ulong> primitive => primitive.Value,
-            PrimitiveTypeRecord<float> primitive => primitive.Value,
-            PrimitiveTypeRecord<double> primitive => primitive.Value,
-            PrimitiveTypeRecord<decimal> primitive => primitive.Value,
-            PrimitiveTypeRecord<TimeSpan> primitive => primitive.Value,
-            PrimitiveTypeRecord<DateTime> primitive => primitive.Value,
-            PrimitiveTypeRecord<IntPtr> primitive => primitive.Value,
-            _ => ((PrimitiveTypeRecord<UIntPtr>)record).Value
-        };
+        return ((PrimitiveTypeRecord)record).Value;
     }
 
     /// <summary>
